@@ -19,13 +19,18 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    total_y = -10;
+//    ofEnableSmoothing();
+    total_y = -5;
     ofSetColor(0);
     vector < ofPath > paths = font.getStringAsPoints("モリサワ");
     
-    for (float j = 0; j < 500; j++){
-        int current_y = 145/(j+1);
-        total_y = total_y + current_y;
+    for (float j = 0; j < 340; j++){
+        int current_y = 141/((j*0.98)+1);
+        if (j < 40) {
+            total_y = total_y + current_y;
+        } else {
+            total_y = total_y + 141/(j*.98);
+        }
         tile_width = 625/(j+1);
         for (int m = 0; m < (j+1); m++){
 //        for (int i = 0; i < paths.size(); i++){
