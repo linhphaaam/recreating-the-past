@@ -2,13 +2,14 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    ofTrueTypeFontSettings settings("CP-Font.otf", 165);
+    ofTrueTypeFontSettings settings("CP-Font-morisawa-edited.ttf", 159);
     settings.antialiased = true;
     settings.contours = true;
     settings.dpi = 72;
     settings.addRanges(ofAlphabet::Japanese);
     font.load(settings);
     ofBackground(255);
+    font.setLetterSpacing(0.98);
 }
 
 //--------------------------------------------------------------
@@ -18,14 +19,14 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    total_y = 0;
+    total_y = -10;
     ofSetColor(0);
-    font.setLetterSpacing(0.75);
     vector < ofPath > paths = font.getStringAsPoints("モリサワ");
+    
     for (float j = 0; j < 500; j++){
-        int current_y = 165/(j+1);
+        int current_y = 145/(j+1);
         total_y = total_y + current_y;
-        tile_width = 600/(j+1);
+        tile_width = 625/(j+1);
         for (int m = 0; m < (j+1); m++){
 //        for (int i = 0; i < paths.size(); i++){
 //            ofPushMatrix();
@@ -36,7 +37,7 @@ void ofApp::draw(){
 //        }
             for (int i = 0; i < paths.size(); i++){
                 ofPushMatrix();
-                ofTranslate(m*tile_width,total_y);
+                ofTranslate(5+m*tile_width,total_y);
                 ofScale(1/(j+1),1/(j+1),1);
                 paths[i].draw();
                 ofPopMatrix();
