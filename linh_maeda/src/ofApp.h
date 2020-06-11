@@ -22,6 +22,8 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
     
         ofTrueTypeFont font;
-        float total_translate;
+        float total_y;
+        float tile_width;
+        float tile_num;
 		
 };

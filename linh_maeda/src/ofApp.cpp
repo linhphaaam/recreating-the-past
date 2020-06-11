@@ -18,20 +18,29 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    total_translate = 0;
+    total_y = 0;
     ofSetColor(0);
     font.setLetterSpacing(0.75);
-    
     vector < ofPath > paths = font.getStringAsPoints("モリサワ");
-    for (float j = 0; j < 10; j++){
-        for (int i = 0; i < paths.size(); i++){
-            int current_translate = 75/(j+1);
-            total_translate = total_translate + current_translate;
-            ofPushMatrix();
-            ofTranslate(0,total_translate);
-            ofScale(1/(j+1),1/(j+1),1);
-            paths[i].draw();
-            ofPopMatrix();
+    for (float j = 0; j < 500; j++){
+        int current_y = 165/(j+1);
+        total_y = total_y + current_y;
+        tile_width = 600/(j+1);
+        for (int m = 0; m < 200; m++){
+//        for (int i = 0; i < paths.size(); i++){
+//            ofPushMatrix();
+//            ofTranslate(600 - tile_width,total_y);
+//            ofScale(1/(j+1),1/(j+1),1);
+//            paths[i].draw();
+//            ofPopMatrix();
+//        }
+            for (int i = 0; i < paths.size(); i++){
+                ofPushMatrix();
+                ofTranslate(m*tile_width,total_y);
+                ofScale(1/(j+1),1/(j+1),1);
+                paths[i].draw();
+                ofPopMatrix();
+            }
         }
     }
     
