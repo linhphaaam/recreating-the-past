@@ -26,7 +26,7 @@ void ofApp::draw(){
         int current_y = 165/(j+1);
         total_y = total_y + current_y;
         tile_width = 600/(j+1);
-        for (int m = 0; m < 200; m++){
+        for (int m = 0; m < (j+1); m++){
 //        for (int i = 0; i < paths.size(); i++){
 //            ofPushMatrix();
 //            ofTranslate(600 - tile_width,total_y);
