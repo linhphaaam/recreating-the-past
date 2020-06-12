@@ -25,7 +25,7 @@ void ofApp::draw(){
     vector < ofPath > paths = font.getStringAsPoints("モリサワ");
     
     for (float j = 0; j < 340; j++){
-        int current_y = 141/((j*0.98)+1);
+        int current_y = 141/((j*0.98)+1);\
         if (j < 40) {
             total_y = total_y + current_y;
         } else {
@@ -33,13 +33,6 @@ void ofApp::draw(){
         }
         tile_width = 625/(j+1);
         for (int m = 0; m < (j+1); m++){
-//        for (int i = 0; i < paths.size(); i++){
-//            ofPushMatrix();
-//            ofTranslate(600 - tile_width,total_y);
-//            ofScale(1/(j+1),1/(j+1),1);
-//            paths[i].draw();
-//            ofPopMatrix();
-//        }
             for (int i = 0; i < paths.size(); i++){
                 ofPushMatrix();
                 ofTranslate(5+m*tile_width,total_y);
