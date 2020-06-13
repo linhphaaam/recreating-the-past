@@ -2,14 +2,15 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    ofTrueTypeFontSettings settings("CP-Font-morisawa-edited.ttf", 159);
+    ofTrueTypeFontSettings settings("CP-Font-morisawa-edited.ttf", 158);
     settings.antialiased = true;
     settings.contours = true;
     settings.dpi = 72;
     settings.addRanges(ofAlphabet::Japanese);
     font.load(settings);
-    ofBackground(255);
     font.setLetterSpacing(0.98);
+    
+    fbo.allocate(ofGetWidth()*8, ofGetHeight()*8, GL_RGBA, 4);
 }
 
 //--------------------------------------------------------------
@@ -19,23 +20,23 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-//    ofEnableSmoothing();
-    total_y = -5;
-    ofSetColor(0);
+    
+    fbo.begin();
+    ofBackground(255,255,255,255);
+    ofPushMatrix();
+    ofScale(8,8);
+    total_y = -3;
+    ofSetColor(30,27,27);
     vector < ofPath > paths = font.getStringAsPoints("モリサワ");
     
-    for (float j = 0; j < 340; j++){
-        int current_y = 141/((j*0.98)+1);\
-        if (j < 40) {
-            total_y = total_y + current_y;
-        } else {
-            total_y = total_y + 141/(j*.98);
-        }
-        tile_width = 625/(j+1);
+    for (float j = 0; j < 350; j++){
+        float current_y = 139/(j+1);
+        total_y = total_y + current_y;
+        tile_width = 621/(j+1);
         for (int m = 0; m < (j+1); m++){
             for (int i = 0; i < paths.size(); i++){
                 ofPushMatrix();
-                ofTranslate(5+m*tile_width,total_y);
+                ofTranslate(7+m*tile_width,total_y);
                 ofScale(1/(j+1),1/(j+1),1);
                 paths[i].draw();
                 ofPopMatrix();
@@ -43,10 +44,22 @@ void ofApp::draw(){
         }
     }
     
+    ofPopMatrix();
+    ofClearAlpha();
+    fbo.end();
+    
+    fbo.draw(0,0,ofGetWidth(), ofGetHeight());
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
+    
+    if (key == ' ') {
+        ofPixels p;
+        fbo.readToPixels(p);
+        ofSaveImage(p, ofGetTimestampString() + ".png");
+    }
 
 }
 

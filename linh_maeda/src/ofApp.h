@@ -25,5 +25,7 @@ class ofApp : public ofBaseApp{
         float total_y;
         float tile_width;
         float tile_num;
+    
+    ofFbo fbo;
 		
 };
