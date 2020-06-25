@@ -29,5 +29,13 @@ class ofApp : public ofBaseApp{
     int seed_i;
     
     int decrease_size;
+    int count;
+    float depth;
+    
+    float sin_col;
+    
+    ofFbo fbo;
+    
+    ofColor hsb_col;
 		
 };

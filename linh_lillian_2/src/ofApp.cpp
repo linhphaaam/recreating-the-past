@@ -2,82 +2,90 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+    ofEnableAlphaBlending();
+    ofSetBackgroundAuto(false);
     ofBackground(0);
     
     decrease_size = 0;
-    ofSetFrameRate(1);
+    ofSetFrameRate(10);
     
     seed_i = 0;
+    
+    hsb_col.setHsb(0, 255, 255);
+    
+    count = 0;
+    
+    fbo.allocate(ofGetWidth(), ofGetHeight(), GL_RGBA);
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    decrease_size = decrease_size + 12;
+
     ofSeedRandom(seed_i);
-    ran_col = ofColor(ofRandom(255),ofRandom(255),ofRandom(255));
+    
+    if (count == 20) {
+        decrease_size = decrease_size + 15;
+        count = 0;
+    }
     
     seed_i = seed_i + 1;
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+
+    ofEnableBlendMode(OF_BLENDMODE_ALPHA);
+    ofSetColor(255, 255, 255, 17);
+    fbo.draw(0,0);
+
+    
+    hsb_col.setHsb(0+(ofGetElapsedTimef() * 12), 255, 255);
+
     ofSeedRandom(0);
+
+    
+    fbo.begin();
     ofEnableDepthTest();
-    cam.enableOrtho();
-    cam.setPosition(600, 400, 300);
-    cam.begin();
-    ofDrawAxis(200);
-    for (int i = 0; i < 200; i++) {
+    ofBackground(0);
+    for (int i = 0; i < 250; i++) {
         ofPushMatrix();
-//        ofSetColor(216,143,51);
+    
+        // draw squares
         int ran_x = ofRandom(1050);
         int ran_y = ofRandom(900);
-        int ran_w = ofRandom(50,250);
+        int ran_w = ofRandom(50,300);
         int w = ofClamp(ran_w - decrease_size, 0, ran_w);
-        ofSetColor(ran_col);
+        ofSetColor(hsb_col);
         ofTranslate(ran_x, ran_y);
         ofRotateDeg(45);
-        ofDrawRectangle(0-(w/2), 0-(w/2),-100,w, w);
+        ofDrawRectangle(0-(w/2), 0-(w/2), -1, w, w);
         ofSetColor(0);
-        ofDrawRectangle(0-(w*0.8/2), 0-(w*0.8/2),-50, w*0.8, w*0.8);
-        ofSetColor(ran_col);
-        ofDrawRectangle(0-(w*0.6/2), 0-(w*0.6/2),0, w*0.6, w*0.6);
+        ofDrawRectangle(0-(w*0.8/2), 0-(w*0.8/2), -0.5, w*0.8, w*0.8);
+        ofSetColor(hsb_col);
+        ofDrawRectangle(0-(w*0.6/2), 0-(w*0.6/2), 0, w*0.6, w*0.6);
         ofSetColor(0);
-        ofDrawRectangle(0-(w*0.4/2), 0-(w*0.4/2),50, w*0.4, w*0.4);
-        ofSetColor(ran_col);
-        ofDrawRectangle(0-(w*0.2/2), 0-(w*0.2/2), 100, w*0.2, w*0.2);
-        
+        ofDrawRectangle(0-(w*0.4/2), 0-(w*0.4/2), 0.5, w*0.4, w*0.4);
+
+        ofSetColor(hsb_col);
+        ofDrawRectangle(0-(w*0.2/2), 0-(w*0.2/2), 1, w*0.2, w*0.2);
+
         ofPopMatrix();
-        
+
     };
     ofDisableDepthTest();
-    
-    for (int i = 0; i < 30; i++) {
-        ofPushMatrix();
-        ofSetColor(ran_col);
-        int ran_x = ofRandom(1050);
-        int ran_y = ofRandom(900);
-        int ran_w = ofRandom(30,120);
-        int w = ofClamp(ran_w - decrease_size, 0, ran_w);
-        ofTranslate(ran_x, ran_y);
-        ofRotateDeg(45);
-        ofDrawRectangle(0-(w/2), 0-(w/2),w, w);
-        ofSetColor(0);
-        ofDrawRectangle(0-(w*0.8/2), 0-(w*0.8/2),w*0.8, w*0.8);
-        ofSetColor(ran_col);
-        ofDrawRectangle(0-(w*0.6/2), 0-(w*0.6/2),w*0.6, w*0.6);
-        ofSetColor(0);
-        ofDrawRectangle(0-(w*0.4/2), 0-(w*0.4/2),w*0.4, w*0.4);
-//        ofSetColor(216,143,51);
-//        ofDrawRectangle(0-(ran_w*0.2/2), 0-(ran_w*0.2/2), ran_w*0.2, ran_w*0.2);
-        
-        ofPopMatrix();
-        
-    };
+    fbo.end();
     
     
+    fbo.draw(0,0);
     
-    cam.end();
+//    cam.enableOrtho();
+//    cam.setPosition(600, 400, 300);
+//    cam.begin();
+
+    
+//    cam.end();
+    
+    count = count + 1;
 
 }
 

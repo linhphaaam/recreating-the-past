@@ -23,8 +23,6 @@ class ofApp : public ofBaseApp{
 
 //    ofImage original;
     ofImage new_image;
-    ofImage hokusai;
-    ofImage hokusai_pixel;
     
     ofImage img;
     

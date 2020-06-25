@@ -170,13 +170,13 @@ void ofApp::setup(){
     original.begin();
     ofBackground(0);
     ofSeedRandom(0);
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 5; i++) {
         ofPushMatrix();
 //        ofSetColor(216,143,51);
         ran_x = ofRandom(600);
         ran_y = ofRandom(600);
-        ran_w = 100;
-//        ran_w = ofRandom(50,250);
+//        ran_w = 100;
+        ran_w = ofRandom(50,150);
         w = ofClamp(ran_w, 0, ran_w);
         ofSetColor(255);
         ofTranslate(ran_x, ran_y);
