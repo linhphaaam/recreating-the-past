@@ -41,28 +41,44 @@ void ofApp::draw(){
 //        for (float i = 0; i < ofClamp(ofGetElapsedTimef()*100-j*255 - 200, 0, ofGetWidth()); i += 3) {
         for (float i = 0; i < ofGetWidth(); i += 3) {
             int modulo = 4*2;
-            int weave_freq = 10;
-            int weave_amp = 4;
+            int weave_freq = 20;
+            int weave_amp = 3;
             float value_i = ofMap(i, 0, ofGetWidth(), 0, TWO_PI);
             int height_denom = 32;
             
-            if (j < 3*ofGetHeight()/height_denom) {
+            if (j < 4*ofGetHeight()/height_denom) {
+                
+                if (j >= 0*ofGetHeight()/height_denom & j < 0.5*ofGetHeight()/height_denom ||
+                   j >= 1*ofGetHeight()/height_denom & j < 1.5*ofGetHeight()/height_denom ||
+                   j >= 2*ofGetHeight()/height_denom & j < 2.5*ofGetHeight()/height_denom ||
+                   j >= 3*ofGetHeight()/height_denom & j < 3.5*ofGetHeight()/height_denom) {
+                   
+                   weave_color(cream, green, i, j, modulo, weave_freq, weave_amp, value_i);
+                   
+               } else {
+                   
+                   weave_color(purple, red, i, j, modulo, weave_freq, weave_amp, value_i);
+               }
+                
+                
+            } else if (j >= 4*ofGetHeight()/height_denom & j < 7*ofGetHeight()/height_denom) {
                 
                 weave_color(yellow, green, i, j, modulo, weave_freq, weave_amp, value_i);
                 
-            } else if (j >= 3*ofGetHeight()/height_denom & j < 6*ofGetHeight()/height_denom) {
+            } else if (j >= 7*ofGetHeight()/height_denom & j < 10*ofGetHeight()/height_denom) {
                 
                 weave_color(purple, red, i, j, modulo, weave_freq, weave_amp, value_i);
                     
-            } else if (j >= 6*ofGetHeight()/height_denom & j < 9*ofGetHeight()/height_denom) {
+            } else if (j >= 10*ofGetHeight()/height_denom & j < 13*ofGetHeight()/height_denom) {
                 
-                weave_color(red, yellow, i, j, modulo, weave_freq, weave_amp, value_i);
+                weave_color(yellow, green, i, j, modulo, weave_freq, weave_amp, value_i);
                 
-            } else if (j >= 9*ofGetHeight()/height_denom & j < 13*ofGetHeight()/height_denom) {
-                if (j >= 9*ofGetHeight()/height_denom & j < 9.5*ofGetHeight()/height_denom ||
-                    j >= 10*ofGetHeight()/height_denom & j < 10.5*ofGetHeight()/height_denom ||
-                    j >= 11*ofGetHeight()/height_denom & j < 11.5*ofGetHeight()/height_denom ||
-                    j >= 12*ofGetHeight()/height_denom & j < 12.5*ofGetHeight()/height_denom) {
+            } else if (j >= 13*ofGetHeight()/height_denom & j < 17*ofGetHeight()/height_denom) {
+                
+                if (j >= 13*ofGetHeight()/height_denom & j < 13.5*ofGetHeight()/height_denom ||
+                    j >= 14*ofGetHeight()/height_denom & j < 14.5*ofGetHeight()/height_denom ||
+                    j >= 15*ofGetHeight()/height_denom & j < 15.5*ofGetHeight()/height_denom ||
+                    j >= 16*ofGetHeight()/height_denom & j < 16.5*ofGetHeight()/height_denom) {
                     
                     weave_color(cream, green, i, j, modulo, weave_freq, weave_amp, value_i);
                     
@@ -71,16 +87,40 @@ void ofApp::draw(){
                     weave_color(purple, red, i, j, modulo, weave_freq, weave_amp, value_i);
                 }
                 
-            } else if (j >= 13*ofGetHeight()/height_denom & j < 16*ofGetHeight()/height_denom){
+            } else if (j >= 17*ofGetHeight()/height_denom & j < 20*ofGetHeight()/height_denom){
                 
                 weave_color(red, yellow, i, j, modulo, weave_freq, weave_amp, value_i);
                 
-            } else if (j >= 16*ofGetHeight()/height_denom & j < 19*ofGetHeight()/height_denom) {
+            } else if (j >= 20*ofGetHeight()/height_denom & j < 23*ofGetHeight()/height_denom) {
                 
                 weave_color(purple, red, i, j, modulo, weave_freq, weave_amp, value_i);
                 
-            } else {
+            } else if (j >= 23*ofGetHeight()/height_denom & j < 26*ofGetHeight()/height_denom) {
+                
+                weave_color(red, yellow, i, j, modulo, weave_freq, weave_amp, value_i);
+                
+            } else if (j >= 26*ofGetHeight()/height_denom & j < 29*ofGetHeight()/height_denom) {
+                
+                if (j >= 26*ofGetHeight()/height_denom & j < 26.5*ofGetHeight()/height_denom ||
+                    j >= 27*ofGetHeight()/height_denom & j < 27.5*ofGetHeight()/height_denom ||
+                    j >= 28*ofGetHeight()/height_denom & j < 28.5*ofGetHeight()/height_denom ||
+                    j >= 29*ofGetHeight()/height_denom & j < 29.5*ofGetHeight()/height_denom) {
+                    
+                    weave_color(cream, green, i, j, modulo, weave_freq, weave_amp, value_i);
+                    
+                } else {
+                    
+                    weave_color(purple, red, i, j, modulo, weave_freq, weave_amp, value_i);
+                }
+                
+            } else if (j >= 29*ofGetHeight()/height_denom & j < 32*ofGetHeight()/height_denom) {
+                
                 weave_color(yellow, green, i, j, modulo, weave_freq, weave_amp, value_i);
+                
+            } else {
+                
+                weave_color(purple, red, i, j, modulo, weave_freq, weave_amp, value_i);
+                
             }
         }
         
@@ -89,8 +129,8 @@ void ofApp::draw(){
     
     
     ofSetColor(cream);
-    ofSetLineWidth(2);
-    for (float i = 26; i < ofGetWidth(); i += 51) {
+    ofSetLineWidth(1);
+    for (float i = 13; i < ofGetWidth(); i += 25.5) {
         ofDrawLine(i, 0, i, ofGetHeight());
     }
     
