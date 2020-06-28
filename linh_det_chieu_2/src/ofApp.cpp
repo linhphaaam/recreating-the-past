@@ -1,5 +1,17 @@
 #include "ofApp.h"
 
+void ofApp::weave_color(ofColor color_1, ofColor color_2, float i, int j, int modulo, int weave_freq, int weave_amp, float value_i){
+    
+    if (j % (modulo) == 0) {
+        ofSetColor(color_1);
+        ofDrawBox(i, weave_amp*sin(value_i*weave_freq), 0, 3, 3, 3);
+    } else {
+        ofSetColor(color_2);
+        ofDrawBox(i, weave_amp*sin(value_i*weave_freq + PI), 0, 3, 3, 3);
+    };
+    
+}
+
 //--------------------------------------------------------------
 void ofApp::setup(){
     red = ofColor(213,48,71);
@@ -20,71 +32,56 @@ void ofApp::draw(){
 //    ofRotateXDeg(90);
 //    ofSetColor(255);
     
-    for (int j = 0; j < ofClamp(ofGetElapsedTimef()*10-20, 0, ofGetHeight()); j +=4) {
+//    for (int j = 0; j < ofClamp(ofGetElapsedTimef()*10-20, 0, ofGetHeight()); j +=4) {
+    for (int j = 0; j < ofGetHeight(); j +=4) {
         ofPushMatrix();
         ofTranslate(0,j);
         ofRotateXDeg(90);
         
-        for (float i = 0; i < ofClamp(ofGetElapsedTimef()*100-j*255 - 200, 0, ofGetWidth()); i += 3) {
+//        for (float i = 0; i < ofClamp(ofGetElapsedTimef()*100-j*255 - 200, 0, ofGetWidth()); i += 3) {
+        for (float i = 0; i < ofGetWidth(); i += 3) {
             int modulo = 4*2;
             int weave_freq = 10;
             int weave_amp = 4;
             float value_i = ofMap(i, 0, ofGetWidth(), 0, TWO_PI);
-            if (j < ofGetHeight()/4) {
+            int height_denom = 32;
+            
+            if (j < 3*ofGetHeight()/height_denom) {
                 
-                if (j % (modulo) == 0) {
-                    ofSetColor(yellow);
-                    ofDrawBox(i, weave_amp*sin(value_i*weave_freq), 0, 3, 3, 3);
-                } else {
-                    ofSetColor(green);
-                    ofDrawBox(i, weave_amp*sin(value_i*weave_freq + PI), 0, 3, 3, 3);
-                }
+                weave_color(yellow, green, i, j, modulo, weave_freq, weave_amp, value_i);
                 
-            } else if (j > ofGetHeight()/4-1 & j < ofGetHeight()/2) {
-                if (j % (modulo) == 0) {
-                    ofSetColor(purple);
-                    ofDrawBox(i, weave_amp*sin(value_i*weave_freq), 0, 3, 3, 3);
-                } else {
-                    ofSetColor(red);
-                    ofDrawBox(i, weave_amp*sin(value_i*weave_freq + PI), 0, 3, 3, 3);
-                }
+            } else if (j >= 3*ofGetHeight()/height_denom & j < 6*ofGetHeight()/height_denom) {
+                
+                weave_color(purple, red, i, j, modulo, weave_freq, weave_amp, value_i);
                     
-            } else if (j > ofGetHeight()/2-1 & j < 3*ofGetHeight()/4) {
-                if (j % (modulo) == 0) {
-                    ofSetColor(red);
-                    ofDrawBox(i, weave_amp*sin(value_i*weave_freq), 0, 3, 3, 3);
+            } else if (j >= 6*ofGetHeight()/height_denom & j < 9*ofGetHeight()/height_denom) {
+                
+                weave_color(red, yellow, i, j, modulo, weave_freq, weave_amp, value_i);
+                
+            } else if (j >= 9*ofGetHeight()/height_denom & j < 13*ofGetHeight()/height_denom) {
+                if (j >= 9*ofGetHeight()/height_denom & j < 9.5*ofGetHeight()/height_denom ||
+                    j >= 10*ofGetHeight()/height_denom & j < 10.5*ofGetHeight()/height_denom ||
+                    j >= 11*ofGetHeight()/height_denom & j < 11.5*ofGetHeight()/height_denom ||
+                    j >= 12*ofGetHeight()/height_denom & j < 12.5*ofGetHeight()/height_denom) {
+                    
+                    weave_color(cream, green, i, j, modulo, weave_freq, weave_amp, value_i);
+                    
                 } else {
-                    ofSetColor(yellow);
-                    ofDrawBox(i, weave_amp*sin(value_i*weave_freq + PI), 0, 3, 3, 3);
+                    
+                    weave_color(purple, red, i, j, modulo, weave_freq, weave_amp, value_i);
                 }
+                
+            } else if (j >= 13*ofGetHeight()/height_denom & j < 16*ofGetHeight()/height_denom){
+                
+                weave_color(red, yellow, i, j, modulo, weave_freq, weave_amp, value_i);
+                
+            } else if (j >= 16*ofGetHeight()/height_denom & j < 19*ofGetHeight()/height_denom) {
+                
+                weave_color(purple, red, i, j, modulo, weave_freq, weave_amp, value_i);
                 
             } else {
-                if (j > 3*ofGetHeight()/4 - 1 & j < 25*ofGetHeight()/32 || j > 26*ofGetHeight()/32 - 1 & j < 27*ofGetHeight()/32 || j > 28*ofGetHeight()/32 - 1 & j < 29*ofGetHeight()/32 || j > 30*ofGetHeight()/32 - 1 & j < 31*ofGetHeight()/32) {
-                    if (j % (modulo) == 0) {
-                        ofSetColor(cream);
-                        ofDrawBox(i, weave_amp*sin(value_i*weave_freq), 0, 3, 3, 3);
-                    } else {
-                        ofSetColor(green);
-                        ofDrawBox(i, weave_amp*sin(value_i*weave_freq + PI), 0, 3, 3, 3);
-                    }
-                } else {
-                    if (j % (modulo) == 0) {
-                        ofSetColor(purple);
-                        ofDrawBox(i, weave_amp*sin(value_i*weave_freq), 0, 3, 3, 3);
-                    } else {
-                        ofSetColor(red);
-                        ofDrawBox(i, weave_amp*sin(value_i*weave_freq + PI), 0, 3, 3, 3);
-                    }
-                }
+                weave_color(yellow, green, i, j, modulo, weave_freq, weave_amp, value_i);
             }
-            
-//            if (j % (6*2) == 0) {
-////                ofDrawBox(i, (40*sin(ofGetElapsedTimef()))*sin(value_i*10), 0, 3, 3, 3);
-//                ofDrawBox(i, 2*sin(value_i*10), 0, 3, 3, 3);
-//            } else {
-////                ofDrawBox(i, (40*sin(ofGetElapsedTimef()))*sin(value_i*10 + PI), 0, 3, 3, 3);
-//                ofDrawBox(i, 2*sin(value_i*10 + PI), 0, 3, 3, 3);
-//            }
         }
         
         ofPopMatrix();

@@ -21,6 +21,8 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     
+    void weave_color(ofColor color_1, ofColor color_2, float i, int j, int modulo, int weave_freq, int weave_amp, float value_i);
+    
     ofColor red;
     ofColor yellow;
     ofColor green;
