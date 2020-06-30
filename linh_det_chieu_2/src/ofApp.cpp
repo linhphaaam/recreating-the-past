@@ -41,8 +41,8 @@ void ofApp::draw(){
 //        for (float i = 0; i < ofClamp(ofGetElapsedTimef()*100-j*255 - 200, 0, ofGetWidth()); i += 3) {
         for (float i = 0; i < ofGetWidth(); i += 3) {
             int modulo = 4*2;
-            int weave_freq = 20;
-            int weave_amp = 3;
+            int weave_freq = 10;
+            int weave_amp = 4;
             float value_i = ofMap(i, 0, ofGetWidth(), 0, TWO_PI);
             int height_denom = 32;
             
@@ -99,7 +99,7 @@ void ofApp::draw(){
                 
                 weave_color(red, yellow, i, j, modulo, weave_freq, weave_amp, value_i);
                 
-            } else if (j >= 26*ofGetHeight()/height_denom & j < 29*ofGetHeight()/height_denom) {
+            } else if (j >= 26*ofGetHeight()/height_denom & j < 30*ofGetHeight()/height_denom) {
                 
                 if (j >= 26*ofGetHeight()/height_denom & j < 26.5*ofGetHeight()/height_denom ||
                     j >= 27*ofGetHeight()/height_denom & j < 27.5*ofGetHeight()/height_denom ||
@@ -113,7 +113,7 @@ void ofApp::draw(){
                     weave_color(purple, red, i, j, modulo, weave_freq, weave_amp, value_i);
                 }
                 
-            } else if (j >= 29*ofGetHeight()/height_denom & j < 32*ofGetHeight()/height_denom) {
+            } else if (j >= 30*ofGetHeight()/height_denom & j < 32*ofGetHeight()/height_denom) {
                 
                 weave_color(yellow, green, i, j, modulo, weave_freq, weave_amp, value_i);
                 
@@ -129,8 +129,8 @@ void ofApp::draw(){
     
     
     ofSetColor(cream);
-    ofSetLineWidth(1);
-    for (float i = 13; i < ofGetWidth(); i += 25.5) {
+    ofSetLineWidth(1.5);
+    for (float i = 26; i < ofGetWidth(); i += 51) {
         ofDrawLine(i, 0, i, ofGetHeight());
     }
     
