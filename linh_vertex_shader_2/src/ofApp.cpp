@@ -10,8 +10,8 @@ void ofApp::setup(){
     int planeWidth = width;
     int planeHeight = height;
 //    int planeGridSize = 200;
-    int planeColums = 50;
-    int planeRows = 50;
+    int planeColums = 100;
+    int planeRows = 100;
     
     plane.set(planeWidth, planeHeight, planeColums, planeRows, OF_PRIMITIVE_POINTS);
     
@@ -26,12 +26,12 @@ void ofApp::setup(){
         vertices.push_back(mesh.getVertices()[i]);
         
     }
-    for (int y = 0; y < height; y+=100){
-        for (int x = 0; x < width; x+=100){
-            mesh_2.addVertex(ofPoint(x,y,0)); // make a new vertex
-            mesh_2.addColor(ofFloatColor(ofRandom(1.),ofRandom(1.),ofRandom(1.)));  // add a color at that vertex
-        }
-    }
+//    for (int y = 0; y < height; y+=100){
+//        for (int x = 0; x < width; x+=100){
+//            mesh_2.addVertex(ofPoint(x,y,0)); // make a new vertex
+//            mesh_2.addColor(ofFloatColor(ofRandom(1.),ofRandom(1.),ofRandom(1.)));  // add a color at that vertex
+//        }
+//    }
 //    for (int i = 0; i < vertices.size(); i++) {
 //        mesh_2.addVertex(vertices[i]);
 //        mesh_2.addColor(ofFloatColor(ofRandom(1.),ofRandom(1.),ofRandom(1.)));
@@ -80,10 +80,11 @@ void ofApp::draw(){
     ofTranslate(cx, cy);
     
     cam.begin();
+    ofEnableDepthTest();
 //    ofBeginShape();
 //    ofEndShape();
 //    mesh.draw();
-    plane.draw();
+    mesh.draw();
     cam.end();
     
     shader.end();

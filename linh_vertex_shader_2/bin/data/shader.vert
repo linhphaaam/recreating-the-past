@@ -48,24 +48,25 @@ void main()
     vec4 pos = position;
     vec4 col = color;
     
-    vec3 a = vec3(0.5, 0.5, 0.5);
-    vec3 b = vec3(0.5, 0.5, 0.5);
-    vec3 c = vec3(0.5, 0.5, 0.5);
-    vec3 d = vec3(0.00, 0.10, 0.20);
+    vec3 a = vec3(0.7, 0.65, 0.8);
+    vec3 b = vec3(0.3, 0.2, 0.4);
+    vec3 c = vec3(0.8, 0.7, 0.1);
+    vec3 d = vec3(0.15, 0.15, 0.10);
     
     float angle = atan(pos.x/pos.y);
     
     
 //    pos.x = pos.x + 50*sin(time*0.5+pos.x*0.01);
 //    pos.z = 400*noise(pos.xy*0.003);
-//    pos.x = pos.x + 80*sin(time*0.5+pos.x*0.008*pos.y*0.003);
-//    pos.y = pos.y + 50*cos(time*0.5+pos.y*0.003);
-    pos.z = 400*noise(pos.xy*0.003);
-    pos.x = pos.x + 80*sin(time*0.5+pos.x*0.008*pos.y*0.003);
-    pos.y = pos.y + 50*cos(time*0.5+pos.x*0.008*pos.y*0.003);
-//    pos.x = pos.x + 50*sin(time*0.05+pos.x);
+//    pos.x = pos.x + 80*sin(time*0.5 + pos.x*0.001);
+//    pos.y = pos.y + 50*cos(time*0.5+pos.y*0.3);
+//    pos.z = -250*sin(time*0.5 + pos.y*0.002) * noise(vec2(time*0.4, (pos.x - pos.y)*0.005));
+    pos.z = -120*sin(time*0.4 + pos.x*0.011 + pos.y*0.009) * noise( pos.xy*0.005);
+    pos.x = pos.x + 40*cos(time*0.4 + pos.x*0.01 * cos(time*0.1 +pos.y*0.001));
+//    pos.y = pos.y + 50*cos(time*0.5+pos.x*0.008*pos.y*0.003);
+//    pos.x = pos.x + 50*sin(time*0.8+pos.z*0.02*pos.y*0.003*pos.x*0.003);
 
-    col = col + 0.7*vec4(pal(pos.z*0.004, a, b, c, d), 1.0);
+    col = col + 0.8*vec4(pal(pos.z*0.003, a, b, c, d), 1.0);
 
 	gl_Position = modelViewProjectionMatrix * pos;
     colorV = col;
